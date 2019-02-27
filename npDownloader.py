@@ -27,13 +27,14 @@ epnum = 1
 while looper:
     
     content = urllib.request.urlopen(initialLink).read()
-
+    looper = False #assume false until proven true
     soup = BeautifulSoup(content, features="html5lib")
     for image in soup.find_all('img'):
         check = image.get('alt')
         if "Episode" in check:
             ep = image.get('src')
-            print(ep)
+            percentage = epnum / 1230 * 100
+            print("  Comic Strip #" + str(epnum) + "  " + str(round(percentage, 2)) + "%")
             dloc = pathname + "\\" + str(epnum) + '.jpg'
             epnum += 1
             wget.download(ep, dloc)
@@ -41,9 +42,10 @@ while looper:
     for links in soup.find_all('a'):
         checknext = str(links.get('rel'))
         if "next" in checknext:
+            looper = True
             initialLink = links.get('href')
 
-print("Series Complete")
+print("  Series Complete  100%")
 
 
 
