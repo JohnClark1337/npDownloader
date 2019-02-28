@@ -12,7 +12,13 @@ import os
 from bs4 import BeautifulSoup
 import wget
 import urllib
-import re
+
+
+def oranizeFiles():
+    for i in range(0, 1230, 10):
+        if epnum <= (i + 10):
+            dloc = pathname + "/{0}/Episode{1}.jpg".format(i, epnum)
+            return dloc
 
 
 dirname = "8-bit Theater"
@@ -21,6 +27,10 @@ initialLink = 'http://www.nuklearpower.com/2001/03/02/episode-001-were-going-whe
 pathname = os.path.expanduser('~') + "\\Documents\\" + dirname
 if os.path.exists(pathname) == False:
     os.makedirs(pathname)
+for i in range(0, 1230, 10):
+    newdir = pathname + "/{}".format(i)
+    if os.path.exists(newdir) == False:
+        os.mkdir(newdir)
 
 looper = True
 epnum = 1
@@ -35,7 +45,7 @@ while looper:
             ep = image.get('src')
             percentage = epnum / 1230 * 100
             print("  Comic Strip #" + str(epnum) + "  " + str(round(percentage, 2)) + "%")
-            dloc = pathname + "\\" + str(epnum) + '.jpg'
+            dloc = oranizeFiles()
             epnum += 1
             wget.download(ep, dloc)
 
