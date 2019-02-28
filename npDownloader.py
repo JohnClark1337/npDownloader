@@ -24,7 +24,7 @@ def oranizeFiles():
 dirname = "8-bit Theater"
 initialLink = 'http://www.nuklearpower.com/2001/03/02/episode-001-were-going-where/'
 
-pathname = os.path.expanduser('~') + "\\Documents\\" + dirname
+pathname = os.path.expanduser('~') + "/Documents/" + dirname
 if os.path.exists(pathname) == False:
     os.makedirs(pathname)
 for i in range(0, 1230, 10):
